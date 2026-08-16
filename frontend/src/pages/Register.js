@@ -3,158 +3,136 @@ import { Link, useNavigate } from "react-router-dom";
 import api from "../api/axios";
 
 function Register() {
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
-  const [form, setForm] = useState({
-    username: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
-
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
+    const [form, setForm] = useState({
+        username: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
     });
-  };
 
-  const handleRegister = async (e) => {
-    e.preventDefault();
-    setError("");
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
 
-    if (!form.username || !form.email || !form.password) {
-      return setError("All fields are required.");
-    }
+    const handleChange = (e) => {
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value,
+        });
+    };
 
-    if (form.password !== form.confirmPassword) {
-      return setError("Passwords do not match.");
-    }
+    const handleRegister = async (e) => {
+        e.preventDefault();
+        setError("");
 
-    try {
-      setLoading(true);
+        if (
+            !form.username ||
+            !form.email ||
+            !form.password ||
+            !form.confirmPassword
+        ) {
+            setError("Please fill in all fields.");
+            return;
+        }
 
-      await api.post("/accounts/register/", {
-        username: form.username,
-        email: form.email,
-        password: form.password,
-      });
+        if (form.password.length < 6) {
+            setError("Password must be at least 6 characters.");
+            return;
+        }
 
-      navigate("/login", {
-        state: { message: "Account created successfully. Please log in." },
-      });
+        if (form.password !== form.confirmPassword) {
+            setError("Passwords do not match.");
+            return;
+        }
 
-    } catch (err) {
-      setError(
-        err.response?.data?.username?.[0] ||
-        err.response?.data?.email?.[0] ||
-        "Registration failed."
-      );
-    } finally {
-      setLoading(false);
-    }
-  };
+        try {
+            setLoading(true);
 
-  return (
-    <div style={styles.container}>
-      <div style={styles.card}>
-        <h1>Create Account</h1>
-        <p>Start tracking your workouts today.</p>
+            await api.post("/accounts/register/", {
+                username: form.username,
+                email: form.email,
+                password: form.password,
+            });
 
-        <form onSubmit={handleRegister}>
-          <input
-            name="username"
-            placeholder="Username"
-            value={form.username}
-            onChange={handleChange}
-            style={styles.input}
-          />
+            navigate("/login");
+        } catch (err) {
+            if (err.response?.data?.username) {
+                setError(err.response.data.username[0]);
+            } else if (err.response?.data?.email) {
+                setError(err.response.data.email[0]);
+            } else {
+                setError("Registration failed. Please try again.");
+            }
+        } finally {
+            setLoading(false);
+        }
+    };
 
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={form.email}
-            onChange={handleChange}
-            style={styles.input}
-          />
+    return (
+        <div className="auth-page">
+            <div className="auth-card">
+                <h1 className="auth-title">Create Account</h1>
 
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={form.password}
-            onChange={handleChange}
-            style={styles.input}
-          />
+                <p className="auth-subtitle">
+                    Join Gym Workout Logger and start tracking your progress.
+                </p>
 
-          <input
-            type="password"
-            name="confirmPassword"
-            placeholder="Confirm Password"
-            value={form.confirmPassword}
-            onChange={handleChange}
-            style={styles.input}
-          />
+                <form onSubmit={handleRegister}>
+                    <input
+                        type="text"
+                        name="username"
+                        placeholder="Username"
+                        value={form.username}
+                        onChange={handleChange}
+                    />
 
-          {error && (
-            <p style={{ color: "#EF4444", marginBottom: "10px" }}>
-              {error}
-            </p>
-          )}
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Email"
+                        value={form.email}
+                        onChange={handleChange}
+                    />
 
-          <button type="submit" style={styles.button} disabled={loading}>
-            {loading ? "Creating Account..." : "Create Account"}
-          </button>
-        </form>
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Password"
+                        value={form.password}
+                        onChange={handleChange}
+                    />
 
-        <p style={{ marginTop: "20px" }}>
-          Already have an account?{" "}
-          <Link to="/login">Log in</Link>
-        </p>
-      </div>
-    </div>
-  );
+                    <input
+                        type="password"
+                        name="confirmPassword"
+                        placeholder="Confirm Password"
+                        value={form.confirmPassword}
+                        onChange={handleChange}
+                    />
+
+                    {error && <p className="auth-error">{error}</p>}
+
+                    <button
+                        type="submit"
+                        className="gold-btn"
+                        disabled={loading}
+                    >
+                        {loading ? "Creating..." : "Create Account"}
+                    </button>
+                </form>
+
+                <div className="auth-divider">
+                    <span>OR</span>
+                </div>
+
+                <p className="auth-footer">
+                    Already have an account?{" "}
+                    <Link to="/login">Login</Link>
+                </p>
+            </div>
+        </div>
+    );
 }
-
-const styles = {
-  container: {
-    minHeight: "100vh",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    background: "#0F172A",
-    padding: "20px",
-  },
-  card: {
-    width: "100%",
-    maxWidth: "420px",
-    background: "#1E293B",
-    color: "#F8FAFC",
-    padding: "30px",
-    borderRadius: "16px",
-  },
-  input: {
-    width: "100%",
-    marginBottom: "15px",
-    padding: "12px",
-    borderRadius: "8px",
-    border: "1px solid #475569",
-    background: "#0F172A",
-    color: "white",
-  },
-  button: {
-    width: "100%",
-    padding: "12px",
-    background: "#F59E0B",
-    color: "#0F172A",
-    fontWeight: "bold",
-    borderRadius: "8px",
-    border: "none",
-  },
-};
 
 export default Register;
