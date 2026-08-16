@@ -11,18 +11,18 @@ function WorkoutDetails() {
     const [rows, setRows] = useState([]);
     const [error, setError] = useState("");
 
-    async function fetchWorkout() {
-        try {
-            const response = await api.get(`/sessions/${id}/`);
-            setSession(response.data);
-        } catch {
-            setError("Failed to load workout.");
-        }
-    }
-
     useEffect(() => {
-        fetchWorkout();
-    }, [id]);
+    const fetchWorkout = async () => {
+        try {
+            const response = await api.get(`/workouts/${id}/`);
+            setWorkout(response.data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    fetchWorkout();
+}, [id]);
     
 
     const addRow = () => {
