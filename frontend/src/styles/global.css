@@ -1,0 +1,373 @@
+/* ===========================
+   Gym Workout Logger
+   Premium Black + Gold Theme
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --bg:#050505;
+    --bg-secondary:#0B0B0B;
+    --card:#111111;
+    --gold:#D4AF37;
+    --gold-dark:#A67C00;
+    --text:#F5F5F5;
+    --muted:#A1A1AA;
+    --border:#3A2F0B;
+}
+
+body{
+    font-family:"Segoe UI",Arial,sans-serif;
+    background:linear-gradient(180deg,#050505 0%,#0A0A0A 100%);
+    color:var(--text);
+    min-height:100vh;
+}
+
+/* ===========================
+   Layout
+=========================== */
+
+.container{
+    max-width:950px;
+    margin:auto;
+    padding:40px 20px;
+}
+
+h1,h2,h3{
+    color:var(--gold);
+    font-weight:700;
+}
+
+p{
+    color:var(--muted);
+}
+
+/* ===========================
+   Navbar
+=========================== */
+
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 30px;
+    background:rgba(0,0,0,.92);
+    border-bottom:1px solid var(--border);
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo h2{
+    color:var(--gold);
+    letter-spacing:.5px;
+}
+
+.page-title{
+    font-size:14px;
+    color:#B3B3B3;
+    margin-top:3px;
+}
+
+/* ===========================
+   Buttons
+=========================== */
+
+button{
+    cursor:pointer;
+    border:none;
+    border-radius:10px;
+    padding:11px 18px;
+    font-weight:600;
+    transition:.25s ease;
+}
+
+.btn-primary{
+    background:var(--gold);
+    color:#111;
+}
+
+.btn-primary:hover{
+    background:#E7C55C;
+    transform:translateY(-1px);
+}
+
+.logout-btn{
+    background:transparent;
+    color:var(--gold);
+    border:2px solid var(--gold);
+}
+
+.logout-btn:hover{
+    background:var(--gold);
+    color:black;
+}
+
+/* ===========================
+   Inputs
+=========================== */
+
+input,
+select,
+textarea{
+    width:100%;
+    padding:12px;
+    border-radius:10px;
+    border:1px solid var(--gold-dark);
+    background:#0F0F0F;
+    color:white;
+    font-size:15px;
+    transition:.2s;
+}
+
+input:focus,
+textarea:focus{
+    outline:none;
+    border-color:var(--gold);
+    box-shadow:0 0 10px rgba(212,175,55,.35);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator{
+    filter:invert(74%) sepia(71%) saturate(400%) hue-rotate(6deg);
+}
+
+/* ===========================
+   Dashboard
+=========================== */
+
+.dashboard-title{
+    font-size:48px;
+    margin-bottom:8px;
+}
+
+.divider{
+    height:2px;
+    background:var(--gold-dark);
+    width:100%;
+    margin:25px 0;
+}
+
+/* ===========================
+   Cards
+=========================== */
+
+.card{
+    background:linear-gradient(180deg,#111111,#0A0A0A);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:22px;
+    margin-bottom:18px;
+    transition:.25s ease;
+    cursor:pointer;
+}
+
+.card:hover{
+    border-color:var(--gold);
+    box-shadow:0 0 18px rgba(212,175,55,.18);
+    transform:translateY(-2px);
+}
+
+.card h3{
+    color:var(--gold);
+    margin-bottom:6px;
+}
+
+.card p{
+    color:#A8A8A8;
+}
+
+/* ===========================
+   Workout Table
+=========================== */
+
+.workout-table{
+    width:100%;
+    border-collapse:collapse;
+    margin-bottom:20px;
+}
+
+.workout-table th{
+    color:var(--gold);
+    text-align:left;
+    padding:12px;
+    border-bottom:1px solid var(--border);
+}
+
+.workout-table td{
+    padding:14px 12px;
+    border-bottom:1px solid rgba(212,175,55,.08);
+}
+
+.workout-table input{
+    width:100%;
+}
+
+/* ===========================
+   Empty State
+=========================== */
+
+.empty-state{
+    border:1px dashed var(--gold-dark);
+    border-radius:16px;
+    text-align:center;
+    padding:60px 20px;
+    background:#0A0A0A;
+}
+
+.empty-state .icon{
+    font-size:50px;
+    color:var(--gold);
+    margin-bottom:15px;
+}
+
+/* ===========================
+   Error Messages
+=========================== */
+
+.error{
+    color:#FF5C5C;
+    margin-bottom:15px;
+    font-weight:600;
+}
+
+.helper-text{
+    color:#FF7A7A;
+    font-size:12px;
+    display:block;
+    margin-top:4px;
+}
+
+/* ===========================
+   Mobile Exercise Cards
+=========================== */
+
+.mobile-card{
+    display:none;
+}
+
+.exercise-card{
+    background:#111111;
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:18px;
+    margin-bottom:18px;
+}
+
+.exercise-card label{
+    display:block;
+    margin:10px 0 5px;
+    color:var(--gold);
+    font-weight:600;
+}
+
+.full-width-btn{
+    width:100%;
+    margin-top:15px;
+}
+
+/* ===========================
+   Button Group
+=========================== */
+
+.button-row{
+    display:flex;
+    gap:12px;
+    margin-top:20px;
+}
+
+/* ===========================
+   Footer
+=========================== */
+
+.footer{
+    text-align:center;
+    color:var(--gold);
+    padding:30px;
+    border-top:1px solid var(--border);
+    margin-top:40px;
+}
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media(max-width:768px){
+
+    .navbar{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:12px;
+    }
+
+    .logout-btn{
+        width:100%;
+    }
+
+    .button-row{
+        flex-direction:column;
+    }
+
+    .button-row button{
+        width:100%;
+    }
+
+    .workout-table{
+        display:none;
+    }
+
+    .mobile-card{
+        display:block;
+    }
+
+    .container{
+        padding:25px 18px;
+    }
+
+    .dashboard-title{
+        font-size:36px;
+    }
+}
+
+/* ===== Center Login Page ===== */
+
+.login-page{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;   /* Horizontal center */
+    align-items:center;       /* Vertical center */
+    padding:20px;
+}
+
+.login-card{
+    width:100%;
+    max-width:420px;
+    background:#111111;
+    border:1px solid #D4AF37;
+    border-radius:20px;
+    padding:40px 30px;
+    box-shadow:0 0 30px rgba(212,175,55,.15);
+}
+
+.login-title{
+    color:#D4AF37;
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.login-card input{
+    margin-bottom:16px;
+}
+
+.login-card .btn-primary{
+    width:100%;
+}
