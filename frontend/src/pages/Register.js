@@ -20,6 +20,10 @@ function Register() {
             ...form,
             [e.target.name]: e.target.value,
         });
+
+        if (error) {
+            setError("");
+        }
     };
 
     const handleRegister = async (e) => {
@@ -61,6 +65,8 @@ function Register() {
                 setError(err.response.data.username[0]);
             } else if (err.response?.data?.email) {
                 setError(err.response.data.email[0]);
+            } else if (err.response?.data?.password) {
+                setError(err.response.data.password[0]);
             } else {
                 setError("Registration failed. Please try again.");
             }
@@ -70,73 +76,187 @@ function Register() {
     };
 
     return (
-        <div className="auth-page">
-            <div className="auth-card">
+        <div className="register-page">
+            <div className="register-background-glow register-glow-one"></div>
+            <div className="register-background-glow register-glow-two"></div>
 
-                <div className="auth-logo">🏋️</div>
+            <div className="register-card">
 
-                <h1 className="auth-title">Create Account</h1>
+                {/* Logo */}
+                <div className="register-logo-wrapper">
+                    <div className="register-logo">
+                        🏋️
+                    </div>
+                </div>
 
-                <p className="auth-subtitle">
-                    Join Gym Workout Logger and start tracking your progress.
-                </p>
+                {/* Heading */}
+                <div className="register-heading">
+                    <h1>Create Account</h1>
 
-                <form onSubmit={handleRegister} className="auth-form">
-                    <input
-                        type="text"
-                        name="username"
-                        placeholder="Username"
-                        value={form.username}
-                        onChange={handleChange}
-                    />
+                    <p>
+                        Start your fitness journey with
+                        <span> Gym Workout Logger</span>
+                    </p>
+                </div>
 
-                    <input
-                        type="email"
-                        name="email"
-                        placeholder="Email"
-                        value={form.email}
-                        onChange={handleChange}
-                    />
+                {/* Form */}
+                <form
+                    onSubmit={handleRegister}
+                    className="register-form"
+                >
 
-                    <input
-                        type="password"
-                        name="password"
-                        placeholder="Password"
-                        value={form.password}
-                        onChange={handleChange}
-                    />
+                    {/* Username */}
+                    <div className="register-field">
+                        <label htmlFor="username">
+                            Username
+                        </label>
 
-                    <input
-                        type="password"
-                        name="confirmPassword"
-                        placeholder="Confirm Password"
-                        value={form.confirmPassword}
-                        onChange={handleChange}
-                    />
+                        <div className="register-input-wrapper">
+                            <span className="register-input-icon">
+                                👤
+                            </span>
 
-                    {error && <p className="auth-error">{error}</p>}
+                            <input
+                                id="username"
+                                type="text"
+                                name="username"
+                                placeholder="Enter your username"
+                                value={form.username}
+                                onChange={handleChange}
+                                autoComplete="username"
+                            />
+                        </div>
+                    </div>
 
+                    {/* Email */}
+                    <div className="register-field">
+                        <label htmlFor="email">
+                            Email Address
+                        </label>
+
+                        <div className="register-input-wrapper">
+                            <span className="register-input-icon">
+                                ✉
+                            </span>
+
+                            <input
+                                id="email"
+                                type="email"
+                                name="email"
+                                placeholder="Enter your email"
+                                value={form.email}
+                                onChange={handleChange}
+                                autoComplete="email"
+                            />
+                        </div>
+                    </div>
+
+                    {/* Password */}
+                    <div className="register-field">
+                        <label htmlFor="password">
+                            Password
+                        </label>
+
+                        <div className="register-input-wrapper">
+                            <span className="register-input-icon">
+                                🔒
+                            </span>
+
+                            <input
+                                id="password"
+                                type="password"
+                                name="password"
+                                placeholder="Create a password"
+                                value={form.password}
+                                onChange={handleChange}
+                                autoComplete="new-password"
+                            />
+                        </div>
+
+                        <small className="register-hint">
+                            Minimum 6 characters
+                        </small>
+                    </div>
+
+                    {/* Confirm Password */}
+                    <div className="register-field">
+                        <label htmlFor="confirmPassword">
+                            Confirm Password
+                        </label>
+
+                        <div className="register-input-wrapper">
+                            <span className="register-input-icon">
+                                🔐
+                            </span>
+
+                            <input
+                                id="confirmPassword"
+                                type="password"
+                                name="confirmPassword"
+                                placeholder="Confirm your password"
+                                value={form.confirmPassword}
+                                onChange={handleChange}
+                                autoComplete="new-password"
+                            />
+                        </div>
+                    </div>
+
+                    {/* Error */}
+                    {error && (
+                        <div className="register-error">
+                            <span>⚠</span>
+                            <p>{error}</p>
+                        </div>
+                    )}
+
+                    {/* Submit */}
                     <button
                         type="submit"
-                        className="gold-btn"
+                        className="register-submit"
                         disabled={loading}
                     >
-                        {loading ? "Creating..." : "Create Account"}
+                        {loading ? (
+                            <>
+                                <span className="register-spinner"></span>
+                                Creating Account...
+                            </>
+                        ) : (
+                            <>
+                                Create Account
+                                <span>→</span>
+                            </>
+                        )}
                     </button>
                 </form>
 
-                <div className="auth-divider">
-                    <span>OR</span>
+                {/* Divider */}
+                <div className="register-divider">
+                    <span></span>
+                    <p>OR</p>
+                    <span></span>
                 </div>
 
-                <p className="auth-footer">
-                    Already have an account?{" "}
-                    <Link to="/login">Log In</Link>
-                </p>
+                {/* Login */}
+                <div className="register-login">
+                    <p>
+                        Already have an account?
+                    </p>
+
+                    <Link to="/login">
+                        Log In
+                    </Link>
+                </div>
+
+                {/* Footer */}
+                <div className="register-footer">
+                    <span>GYM WORKOUT LOGGER</span>
+                    <span>•</span>
+                    <span>TRACK. TRAIN. PROGRESS.</span>
+                </div>
 
             </div>
         </div>
     );
-  }
+}
 
-  export default Register;
+export default Register;
