@@ -154,8 +154,7 @@ MAILERS = {
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
-    "gym-workout-logger-pink.vercel.app",
-]
+    "https://gym-workout-logger-pink.vercel.app"]
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
@@ -174,5 +173,6 @@ SIMPLE_JWT = {
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
 CSRF_TRUSTED_ORIGINS = [
-    "gym-workout-logger-pink.vercel.app",
+    "https://gym-workout-logger-pink.vercel.app",
+    "http://localhost:3000"
 ]

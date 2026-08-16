@@ -72,13 +72,16 @@ function Register() {
     return (
         <div className="auth-page">
             <div className="auth-card">
+
+                <div className="auth-logo">🏋️</div>
+
                 <h1 className="auth-title">Create Account</h1>
 
                 <p className="auth-subtitle">
                     Join Gym Workout Logger and start tracking your progress.
                 </p>
 
-                <form onSubmit={handleRegister}>
+                <form onSubmit={handleRegister} className="auth-form">
                     <input
                         type="text"
                         name="username"
@@ -128,11 +131,12 @@ function Register() {
 
                 <p className="auth-footer">
                     Already have an account?{" "}
-                    <Link to="/login">Login</Link>
+                    <Link to="/login">Log In</Link>
                 </p>
+
             </div>
         </div>
     );
-}
+  }
 
-export default Register;
+  export default Register;

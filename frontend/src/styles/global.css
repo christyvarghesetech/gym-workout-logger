@@ -1,7 +1,9 @@
-/* ===========================
-   Gym Workout Logger
+/* =========================================================
+   GYM WORKOUT LOGGER
    Premium Black + Gold Theme
-=========================== */
+========================================================= */
+
+/* ---------- RESET ---------- */
 
 *{
     margin:0;
@@ -9,370 +11,75 @@
     box-sizing:border-box;
 }
 
-:root{
-    --bg:#050505;
-    --bg-secondary:#0B0B0B;
-    --card:#111111;
-    --gold:#D4AF37;
-    --gold-dark:#A67C00;
-    --text:#F5F5F5;
-    --muted:#A1A1AA;
-    --border:#3A2F0B;
-}
-
 body{
     font-family:"Segoe UI",Arial,sans-serif;
-    background:linear-gradient(180deg,#050505 0%,#0A0A0A 100%);
-    color:var(--text);
-    min-height:100vh;
+    background:#050505;
+    color:#F8FAFC;
 }
 
-/* ===========================
-   Layout
-=========================== */
+/* ---------- SCROLLBAR ---------- */
 
-.container{
-    max-width:950px;
-    margin:auto;
-    padding:40px 20px;
+::-webkit-scrollbar{
+    width:8px;
 }
 
-h1,h2,h3{
-    color:var(--gold);
-    font-weight:700;
+::-webkit-scrollbar-track{
+    background:#111;
 }
 
-p{
-    color:var(--muted);
+::-webkit-scrollbar-thumb{
+    background:#D4AF37;
+    border-radius:20px;
 }
 
-/* ===========================
-   Navbar
-=========================== */
-
-.navbar{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:18px 30px;
-    background:rgba(0,0,0,.92);
-    border-bottom:1px solid var(--border);
-    position:sticky;
-    top:0;
-    z-index:100;
-}
-
-.logo{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.logo h2{
-    color:var(--gold);
-    letter-spacing:.5px;
-}
-
-.page-title{
-    font-size:14px;
-    color:#B3B3B3;
-    margin-top:3px;
-}
-
-/* ===========================
-   Buttons
-=========================== */
+/* ---------- BUTTONS ---------- */
 
 button{
     cursor:pointer;
     border:none;
-    border-radius:10px;
-    padding:11px 18px;
-    font-weight:600;
-    transition:.25s ease;
+    border-radius:12px;
+    transition:.3s ease;
 }
 
-.btn-primary{
-    background:var(--gold);
-    color:#111;
-}
-
-.btn-primary:hover{
-    background:#E7C55C;
-    transform:translateY(-1px);
-}
-
-.logout-btn{
-    background:transparent;
-    color:var(--gold);
-    border:2px solid var(--gold);
-}
-
-.logout-btn:hover{
-    background:var(--gold);
-    color:black;
-}
-
-/* ===========================
-   Inputs
-=========================== */
-
-input,
-select,
-textarea{
+.gold-btn{
     width:100%;
-    padding:12px;
-    border-radius:10px;
-    border:1px solid var(--gold-dark);
-    background:#0F0F0F;
+    padding:14px;
+    background:linear-gradient(135deg,#FFD700,#C99A00);
+    color:#000;
+    font-size:16px;
+    font-weight:700;
+}
+
+.gold-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 28px rgba(212,175,55,.35);
+}
+
+/* ---------- INPUTS ---------- */
+
+input{
+    width:100%;
+    padding:14px;
+    border-radius:12px;
+    border:1px solid rgba(212,175,55,.3);
+    background:#111;
     color:white;
-    font-size:15px;
-    transition:.2s;
+    transition:.3s;
 }
 
-input:focus,
-textarea:focus{
+input::placeholder{
+    color:#777;
+}
+
+input:focus{
     outline:none;
-    border-color:var(--gold);
-    box-shadow:0 0 10px rgba(212,175,55,.35);
+    border-color:#D4AF37;
+    box-shadow:0 0 12px rgba(212,175,55,.35);
 }
 
-input[type="date"]::-webkit-calendar-picker-indicator{
-    filter:invert(74%) sepia(71%) saturate(400%) hue-rotate(6deg);
-}
-
-/* ===========================
-   Dashboard
-=========================== */
-
-.dashboard-title{
-    font-size:48px;
-    margin-bottom:8px;
-}
-
-.divider{
-    height:2px;
-    background:var(--gold-dark);
-    width:100%;
-    margin:25px 0;
-}
-
-/* ===========================
-   Cards
-=========================== */
-
-.card{
-    background:linear-gradient(180deg,#111111,#0A0A0A);
-    border:1px solid var(--border);
-    border-radius:16px;
-    padding:22px;
-    margin-bottom:18px;
-    transition:.25s ease;
-    cursor:pointer;
-}
-
-.card:hover{
-    border-color:var(--gold);
-    box-shadow:0 0 18px rgba(212,175,55,.18);
-    transform:translateY(-2px);
-}
-
-.card h3{
-    color:var(--gold);
-    margin-bottom:6px;
-}
-
-.card p{
-    color:#A8A8A8;
-}
-
-/* ===========================
-   Workout Table
-=========================== */
-
-.workout-table{
-    width:100%;
-    border-collapse:collapse;
-    margin-bottom:20px;
-}
-
-.workout-table th{
-    color:var(--gold);
-    text-align:left;
-    padding:12px;
-    border-bottom:1px solid var(--border);
-}
-
-.workout-table td{
-    padding:14px 12px;
-    border-bottom:1px solid rgba(212,175,55,.08);
-}
-
-.workout-table input{
-    width:100%;
-}
-
-/* ===========================
-   Empty State
-=========================== */
-
-.empty-state{
-    border:1px dashed var(--gold-dark);
-    border-radius:16px;
-    text-align:center;
-    padding:60px 20px;
-    background:#0A0A0A;
-}
-
-.empty-state .icon{
-    font-size:50px;
-    color:var(--gold);
-    margin-bottom:15px;
-}
-
-/* ===========================
-   Error Messages
-=========================== */
-
-.error{
-    color:#FF5C5C;
-    margin-bottom:15px;
-    font-weight:600;
-}
-
-.helper-text{
-    color:#FF7A7A;
-    font-size:12px;
-    display:block;
-    margin-top:4px;
-}
-
-/* ===========================
-   Mobile Exercise Cards
-=========================== */
-
-.mobile-card{
-    display:none;
-}
-
-.exercise-card{
-    background:#111111;
-    border:1px solid var(--border);
-    border-radius:16px;
-    padding:18px;
-    margin-bottom:18px;
-}
-
-.exercise-card label{
-    display:block;
-    margin:10px 0 5px;
-    color:var(--gold);
-    font-weight:600;
-}
-
-.full-width-btn{
-    width:100%;
-    margin-top:15px;
-}
-
-/* ===========================
-   Button Group
-=========================== */
-
-.button-row{
-    display:flex;
-    gap:12px;
-    margin-top:20px;
-}
-
-/* ===========================
-   Footer
-=========================== */
-
-.footer{
-    text-align:center;
-    color:var(--gold);
-    padding:30px;
-    border-top:1px solid var(--border);
-    margin-top:40px;
-}
-
-/* ===========================
-   Responsive
-=========================== */
-
-@media(max-width:768px){
-
-    .navbar{
-        flex-direction:column;
-        align-items:flex-start;
-        gap:12px;
-    }
-
-    .logout-btn{
-        width:100%;
-    }
-
-    .button-row{
-        flex-direction:column;
-    }
-
-    .button-row button{
-        width:100%;
-    }
-
-    .workout-table{
-        display:none;
-    }
-
-    .mobile-card{
-        display:block;
-    }
-
-    .container{
-        padding:25px 18px;
-    }
-
-    .dashboard-title{
-        font-size:36px;
-    }
-}
-
-/* ===== Center Login Page ===== */
-
-.login-page{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;   /* Horizontal center */
-    align-items:center;       /* Vertical center */
-    padding:20px;
-}
-
-.login-card{
-    width:100%;
-    max-width:420px;
-    background:#111111;
-    border:1px solid #D4AF37;
-    border-radius:20px;
-    padding:40px 30px;
-    box-shadow:0 0 30px rgba(212,175,55,.15);
-}
-
-.login-title{
-    color:#D4AF37;
-    text-align:center;
-    margin-bottom:25px;
-}
-
-.login-card input{
-    margin-bottom:16px;
-}
-
-.login-card .btn-primary{
-    width:100%;
-}
-
-/* ---------- Premium Auth Pages ---------- */
+/* =========================================================
+   AUTH PAGES
+========================================================= */
 
 .auth-page{
     min-height:100vh;
@@ -380,126 +87,575 @@ input[type="date"]::-webkit-calendar-picker-indicator{
     justify-content:center;
     align-items:center;
     padding:20px;
+    position:relative;
+    overflow:hidden;
+
     background:
-        radial-gradient(circle at top,#3b2d0f 0%,#000 40%,#000 100%);
+    radial-gradient(circle at top,#3a2b05 0%,#111111 35%,#000000 100%);
+}
+
+.auth-page::before{
+    content:"";
+    position:absolute;
+    width:420px;
+    height:420px;
+    border-radius:50%;
+    background:rgba(212,175,55,.08);
+    filter:blur(130px);
 }
 
 .auth-card{
+    position:relative;
+    z-index:2;
+
     width:100%;
-    max-width:420px;
-    background:rgba(15,15,15,.92);
+    max-width:430px;
+
+    padding:42px 34px;
+
+    border-radius:26px;
+
+    background:rgba(10,10,10,.96);
+
     border:1px solid rgba(212,175,55,.35);
-    border-radius:24px;
-    padding:40px 35px;
+
     backdrop-filter:blur(18px);
+
     box-shadow:
+        0 20px 60px rgba(0,0,0,.8),
         0 0 40px rgba(212,175,55,.12),
-        inset 0 0 20px rgba(255,215,0,.04);
-    animation:floatCard 4s ease-in-out infinite;
+        inset 0 0 25px rgba(255,215,0,.04);
+
+    animation:floatCard 5s ease-in-out infinite;
 }
 
 @keyframes floatCard{
-    0%,100%{transform:translateY(0);}
-    50%{transform:translateY(-8px);}
+
+0%,100%{
+transform:translateY(0);
+}
+
+50%{
+transform:translateY(-10px);
+}
+
 }
 
 .auth-title{
-    text-align:center;
-    color:#D4AF37;
-    font-size:36px;
-    margin-bottom:10px;
-    font-weight:700;
+
+font-size:42px;
+font-weight:800;
+text-align:center;
+
+color:#D4AF37;
+
+margin-bottom:10px;
+
 }
 
 .auth-subtitle{
-    text-align:center;
-    color:#B8B8B8;
-    margin-bottom:28px;
-    font-size:14px;
+
+text-align:center;
+color:#9CA3AF;
+
+margin-bottom:28px;
+
 }
 
-.auth-card input{
-    width:100%;
-    margin-bottom:16px;
-    padding:14px 16px;
-    border:1px solid rgba(212,175,55,.35);
-    border-radius:12px;
-    background:#111;
-    color:#fff;
-    transition:.3s;
-}
+.auth-card form{
 
-.auth-card input:focus{
-    outline:none;
-    border-color:#D4AF37;
-    box-shadow:0 0 12px rgba(212,175,55,.35);
-}
+display:flex;
+flex-direction:column;
+gap:16px;
 
-.gold-btn{
-    width:100%;
-    padding:14px;
-    margin-top:10px;
-    border:none;
-    border-radius:12px;
-    background:linear-gradient(135deg,#FFD700,#D4AF37);
-    color:#000;
-    font-weight:700;
-    transition:.3s;
-}
-
-.gold-btn:hover{
-    transform:translateY(-2px);
-    box-shadow:0 8px 25px rgba(212,175,55,.35);
-}
-
-.gold-btn:disabled{
-    opacity:.7;
-    cursor:not-allowed;
 }
 
 .auth-error{
-    color:#ff5a5a;
-    margin:8px 0 12px;
-    font-size:14px;
-    text-align:center;
+
+color:#ff5a5a;
+text-align:center;
+font-size:14px;
+
 }
 
 .auth-divider{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    color:#666;
-    margin:22px 0;
+
+display:flex;
+align-items:center;
+gap:12px;
+
+margin:24px 0;
+
+color:#666;
+
 }
 
 .auth-divider::before,
 .auth-divider::after{
-    content:"";
-    flex:1;
-    height:1px;
-    background:#333;
+
+content:"";
+
+flex:1;
+height:1px;
+
+background:#333;
+
 }
 
 .auth-footer{
-    text-align:center;
-    color:#B8B8B8;
+
+text-align:center;
+color:#9CA3AF;
+
 }
 
 .auth-footer a{
-    color:#D4AF37;
-    text-decoration:none;
+
+color:#D4AF37;
+text-decoration:none;
+font-weight:600;
+
 }
 
 .auth-footer a:hover{
-    text-decoration:underline;
+
+color:#FFD700;
+
+}
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+padding:22px 40px;
+
+background:#090909;
+
+border-bottom:1px solid rgba(212,175,55,.2);
+
+position:sticky;
+top:0;
+
+z-index:1000;
+
+}
+
+.nav-left{
+
+display:flex;
+flex-direction:column;
+
+}
+
+.logo{
+
+font-size:34px;
+font-weight:800;
+
+color:#FFD700;
+
+}
+
+.page-title{
+
+font-size:15px;
+color:#AAA;
+
+margin-top:4px;
+
+}
+
+.logout-btn{
+
+padding:12px 22px;
+
+background:#B91C1C;
+color:white;
+
+border-radius:12px;
+
+font-weight:700;
+
+}
+
+.logout-btn:hover{
+
+background:#DC2626;
+transform:translateY(-2px);
+
+}
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+.dashboard{
+
+max-width:900px;
+
+margin:auto;
+
+padding:40px 20px;
+
+}
+
+.dashboard h1{
+
+font-size:42px;
+text-align:center;
+
+color:#FFD700;
+
+margin-bottom:30px;
+
+}
+
+.dashboard-form{
+
+display:flex;
+gap:14px;
+
+margin-bottom:35px;
+
+}
+
+.dashboard-form button{
+
+background:linear-gradient(135deg,#FFD700,#C99A00);
+
+padding:14px 24px;
+
+font-weight:700;
+color:black;
+
+}
+
+.dashboard-form button:hover{
+
+transform:translateY(-2px);
+
+}
+
+.workout-card{
+
+background:#111;
+
+border:1px solid rgba(212,175,55,.2);
+
+border-radius:18px;
+
+padding:22px;
+
+margin-bottom:18px;
+
+transition:.3s;
+
+cursor:pointer;
+
+box-shadow:0 10px 30px rgba(0,0,0,.45);
+
+}
+
+.workout-card:hover{
+
+transform:translateY(-5px);
+
+border-color:#D4AF37;
+
+box-shadow:0 15px 40px rgba(212,175,55,.15);
+
+}
+
+.workout-card h3{
+
+color:#FFD700;
+
+margin-bottom:8px;
+
+}
+
+.workout-card p{
+
+color:#AAA;
+
+}
+
+/* =========================================================
+   TABLE
+========================================================= */
+
+.workout-table{
+
+width:100%;
+
+border-collapse:collapse;
+
+margin:25px 0;
+
+}
+
+.workout-table th{
+
+background:#1a1a1a;
+
+color:#FFD700;
+
+padding:15px;
+
+border-bottom:1px solid rgba(212,175,55,.3);
+
+}
+
+.workout-table td{
+
+padding:15px;
+
+border-bottom:1px solid rgba(255,255,255,.05);
+
+vertical-align:top;
+
+}
+
+.workout-table input{
+
+width:100%;
+
+}
+
+.workout-table button{
+
+background:#B91C1C;
+
+color:white;
+
+padding:10px 14px;
+
+}
+
+.workout-table button:hover{
+
+background:#DC2626;
+
+}
+
+/* =========================================================
+   EXERCISE CARDS
+========================================================= */
+
+.mobile-card{
+
+display:none;
+
+}
+
+.exercise-card{
+
+background:#111;
+
+border:1px solid rgba(212,175,55,.2);
+
+border-radius:16px;
+
+padding:18px;
+
+margin-bottom:16px;
+
+box-shadow:0 8px 25px rgba(0,0,0,.35);
+
+}
+
+.exercise-card label{
+
+display:block;
+
+margin-top:12px;
+margin-bottom:6px;
+
+color:#FFD700;
+font-weight:600;
+
+}
+
+/* =========================================================
+   BUTTON ROW
+========================================================= */
+
+.button-row{
+
+display:flex;
+gap:12px;
+
+margin-top:20px;
+
+}
+
+.button-row button{
+
+flex:1;
+
+padding:14px;
+
+}
+
+.full-width-btn{
+
+width:100%;
+margin-top:18px;
+
+}
+
+/* =========================================================
+   VALIDATION
+========================================================= */
+
+.input-error{
+
+border:1px solid #ff4d4d!important;
+
+box-shadow:0 0 10px rgba(255,77,77,.25);
+
+}
+
+.helper-text{
+
+color:#ff6b6b;
+
+font-size:13px;
+
+margin-top:5px;
+
+display:block;
+
+}
+
+/* =========================================================
+   EMPTY STATES
+========================================================= */
+
+.empty-state{
+
+text-align:center;
+
+padding:70px 20px;
+
+background:#111;
+
+border-radius:18px;
+
+border:1px dashed rgba(212,175,55,.25);
+
+}
+
+.empty-state h2{
+
+color:#FFD700;
+
+margin-bottom:12px;
+
+}
+
+.empty-state p{
+
+color:#AAA;
+
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:768px){
+
+.navbar{
+
+flex-direction:column;
+align-items:flex-start;
+gap:18px;
+
+padding:20px;
+
+}
+
+.logout-btn{
+
+width:100%;
+
+}
+
+.dashboard{
+
+padding:25px 15px;
+
+}
+
+.dashboard h1{
+
+font-size:34px;
+
+}
+
+.dashboard-form{
+
+flex-direction:column;
+
+}
+
+.workout-table{
+
+display:none;
+
+}
+
+.mobile-card{
+
+display:block;
+
+}
+
+.button-row{
+
+flex-direction:column;
+
+}
+
+.full-width-btn{
+
+width:100%;
+
+}
+
 }
 
 @media(max-width:480px){
-    .auth-card{
-        padding:30px 24px;
-    }
 
-    .auth-title{
-        font-size:30px;
-    }
+.auth-card{
+
+padding:32px 24px;
+
+}
+
+.auth-title{
+
+font-size:34px;
+
+}
+
+.logo{
+
+font-size:28px;
+
+}
+
+.dashboard h1{
+
+font-size:30px;
+
+}
+
 }
