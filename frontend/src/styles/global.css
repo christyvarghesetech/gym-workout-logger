@@ -659,3 +659,616 @@ font-size:30px;
 }
 
 }
+/* =========================================================
+   PREMIUM REGISTER PAGE
+   ========================================================= */
+
+.register-page {
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 60px 20px;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(212, 175, 55, 0.10),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 0% 100%,
+            rgba(212, 175, 55, 0.05),
+            transparent 30%
+        ),
+        #050505;
+
+    color: #ffffff;
+}
+
+
+/* Background glow */
+
+.register-background-glow {
+    position: absolute;
+
+    width: 350px;
+    height: 350px;
+
+    border-radius: 50%;
+
+    background: rgba(212, 175, 55, 0.07);
+
+    filter: blur(100px);
+
+    pointer-events: none;
+}
+
+.register-glow-one {
+    top: -180px;
+    right: -100px;
+}
+
+.register-glow-two {
+    bottom: -200px;
+    left: -120px;
+}
+
+
+/* Main card */
+
+.register-card {
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+    max-width: 470px;
+
+    padding: 42px 42px 30px;
+
+    border: 1px solid rgba(212, 175, 55, 0.20);
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(25, 25, 25, 0.98),
+            rgba(10, 10, 10, 0.98)
+        );
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.65),
+        0 0 40px rgba(212, 175, 55, 0.04);
+
+    backdrop-filter: blur(20px);
+
+    animation: registerCardAppear 0.6s ease;
+}
+
+
+@keyframes registerCardAppear {
+    from {
+        opacity: 0;
+        transform: translateY(25px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+/* Top gold line */
+
+.register-card::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 12%;
+    right: 12%;
+
+    height: 2px;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        #d4af37,
+        transparent
+    );
+
+    border-radius: 50%;
+}
+
+
+/* Logo */
+
+.register-logo-wrapper {
+    display: flex;
+    justify-content: center;
+
+    margin-bottom: 18px;
+}
+
+
+.register-logo {
+    width: 68px;
+    height: 68px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(212, 175, 55, 0.20),
+            rgba(212, 175, 55, 0.05)
+        );
+
+    border: 1px solid rgba(212, 175, 55, 0.35);
+
+    font-size: 31px;
+
+    box-shadow:
+        0 10px 35px rgba(212, 175, 55, 0.08);
+}
+
+
+/* Heading */
+
+.register-heading {
+    text-align: center;
+
+    margin-bottom: 30px;
+}
+
+
+.register-heading h1 {
+    margin: 0 0 10px;
+
+    color: #ffffff;
+
+    font-size: 32px;
+    font-weight: 700;
+
+    letter-spacing: -0.8px;
+}
+
+
+.register-heading p {
+    margin: 0;
+
+    color: #888888;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+.register-heading p span {
+    color: #d4af37;
+
+    font-weight: 600;
+}
+
+
+/* Form */
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+
+    gap: 18px;
+}
+
+
+/* Field */
+
+.register-field {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+
+.register-field label {
+    color: #d8d8d8;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    letter-spacing: 0.2px;
+}
+
+
+/* Input */
+
+.register-input-wrapper {
+    position: relative;
+
+    width: 100%;
+}
+
+
+.register-input-icon {
+    position: absolute;
+
+    left: 16px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #8c8c8c;
+
+    font-size: 15px;
+
+    pointer-events: none;
+
+    transition: color 0.2s ease;
+}
+
+
+.register-input-wrapper input {
+    width: 100%;
+
+    height: 50px;
+
+    box-sizing: border-box;
+
+    padding: 0 15px 0 45px;
+
+    border-radius: 11px;
+
+    border: 1px solid #2b2b2b;
+
+    outline: none;
+
+    background: #111111;
+
+    color: #ffffff;
+
+    font-size: 14px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.register-input-wrapper input::placeholder {
+    color: #5d5d5d;
+}
+
+
+.register-input-wrapper input:hover {
+    border-color: #3a3a3a;
+}
+
+
+.register-input-wrapper input:focus {
+    border-color: #d4af37;
+
+    background: #141414;
+
+    box-shadow:
+        0 0 0 3px rgba(212, 175, 55, 0.08);
+}
+
+
+.register-input-wrapper:focus-within
+.register-input-icon {
+    color: #d4af37;
+}
+
+
+/* Password hint */
+
+.register-hint {
+    margin-top: -2px;
+
+    color: #606060;
+
+    font-size: 11px;
+}
+
+
+/* Error */
+
+.register-error {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 12px 14px;
+
+    border-radius: 10px;
+
+    border: 1px solid rgba(255, 75, 75, 0.20);
+
+    background: rgba(255, 75, 75, 0.06);
+}
+
+
+.register-error span {
+    color: #ff6b6b;
+
+    font-size: 15px;
+}
+
+
+.register-error p {
+    margin: 0;
+
+    color: #ff8585;
+
+    font-size: 12px;
+
+    line-height: 1.4;
+}
+
+
+/* Submit button */
+
+.register-submit {
+    width: 100%;
+
+    height: 52px;
+
+    margin-top: 4px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 12px;
+
+    border: none;
+    border-radius: 11px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #d4af37,
+            #b89120
+        );
+
+    color: #050505;
+
+    font-size: 13px;
+    font-weight: 800;
+
+    letter-spacing: 0.8px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 25px rgba(212, 175, 55, 0.15);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        filter 0.2s ease;
+}
+
+
+.register-submit:hover:not(:disabled) {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 32px rgba(212, 175, 55, 0.24);
+
+    filter: brightness(1.08);
+}
+
+
+.register-submit:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+
+.register-submit:disabled {
+    cursor: not-allowed;
+
+    opacity: 0.65;
+}
+
+
+/* Spinner */
+
+.register-spinner {
+    width: 16px;
+    height: 16px;
+
+    border: 2px solid rgba(0, 0, 0, 0.25);
+
+    border-top-color: #050505;
+
+    border-radius: 50%;
+
+    animation: registerSpin 0.7s linear infinite;
+}
+
+
+@keyframes registerSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* Divider */
+
+.register-divider {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    margin: 27px 0 20px;
+}
+
+
+.register-divider span {
+    flex: 1;
+
+    height: 1px;
+
+    background: #252525;
+}
+
+
+.register-divider p {
+    margin: 0;
+
+    color: #555555;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+
+/* Login */
+
+.register-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 6px;
+
+    font-size: 13px;
+}
+
+
+.register-login p {
+    margin: 0;
+
+    color: #777777;
+}
+
+
+.register-login a {
+    color: #d4af37;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition: color 0.2s ease;
+}
+
+
+.register-login a:hover {
+    color: #f0cc52;
+
+    text-decoration: underline;
+}
+
+
+/* Footer */
+
+.register-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 8px;
+
+    margin-top: 27px;
+
+    color: #3f3f3f;
+
+    font-size: 8px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .register-page {
+        padding: 30px 15px;
+    }
+
+    .register-card {
+        padding: 34px 24px 25px;
+
+        border-radius: 18px;
+    }
+
+    .register-logo {
+        width: 60px;
+        height: 60px;
+
+        font-size: 27px;
+    }
+
+    .register-heading h1 {
+        font-size: 27px;
+    }
+
+    .register-heading {
+        margin-bottom: 25px;
+    }
+
+    .register-form {
+        gap: 16px;
+    }
+
+    .register-input-wrapper input {
+        height: 48px;
+    }
+
+    .register-submit {
+        height: 50px;
+    }
+
+    .register-footer {
+        font-size: 7px;
+    }
+}
+
+
+@media (max-width: 380px) {
+
+    .register-card {
+        padding: 30px 18px 22px;
+    }
+
+    .register-heading h1 {
+        font-size: 24px;
+    }
+
+    .register-heading p {
+        font-size: 13px;
+    }
+
+    .register-footer {
+        gap: 5px;
+
+        letter-spacing: 0.5px;
+    }
+}
