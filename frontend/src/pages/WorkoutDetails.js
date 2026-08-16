@@ -23,14 +23,7 @@ function WorkoutDetails() {
     useEffect(() => {
         fetchWorkout();
     }, [id]);
-
-    // ...rest of your code
-}
-
-
-    useEffect(() => {
-        fetchWorkout();
-    }, [fetchWorkout]);
+    
 
     const addRow = () => {
         setRows([
