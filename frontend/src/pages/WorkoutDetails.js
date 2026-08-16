@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-
+import { useEffect, useState, useCallback } from "react";import { useParams } from "react-router-dom";
 import api from "../api/axios";
 import LoadingSpinner from "../components/LoadingSpinner";
 import Navbar from "../components/Navbar";
@@ -14,16 +12,16 @@ function WorkoutDetails() {
 
     useEffect(() => {
         fetchWorkout();
-    }, []);
+    }, [fetchWorkout]);
 
-    const fetchWorkout = async () => {
+    const fetchWorkout = useCallback(async () => {
         try {
             const response = await api.get(`/sessions/${id}/`);
             setSession(response.data);
         } catch {
             setError("Failed to load workout.");
         }
-    };
+    }, [id]);
 
     const addRow = () => {
         setRows([
