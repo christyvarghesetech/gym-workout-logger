@@ -10,9 +10,6 @@ function WorkoutDetails() {
     const [rows, setRows] = useState([]);
     const [error, setError] = useState("");
 
-    useEffect(() => {
-        fetchWorkout();
-    }, [fetchWorkout]);
 
     const fetchWorkout = useCallback(async () => {
         try {
@@ -22,6 +19,10 @@ function WorkoutDetails() {
             setError("Failed to load workout.");
         }
     }, [id]);
+
+    useEffect(() => {
+        fetchWorkout();
+    }, [fetchWorkout]);
 
     const addRow = () => {
         setRows([
