@@ -87,7 +87,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     "default": dj_database_url.config(
-        default=os.getenv("postgresql://gymworkout_user:t7UMG7sMXl2Oit5IiidbTD7isPWZUQqC@dpg-da0nhlojo6nc73evg5d0-a/gymworkout")
+        default=os.getenv("DATABASE_URL")
     )
 }
 
