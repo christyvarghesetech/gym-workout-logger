@@ -12,14 +12,7 @@ function App() {
       <Routes>
 
         {/* Public Landing Page */}
-        <Route
-            path="/"
-            element={
-              localStorage.getItem("access")
-                ? <Navigate to="/dashboard" replace />
-                : <LandingPage />
-            }
-          />
+        <Route path="/" element={<LandingPage />} />
 
         {/* Public Authentication */}
         <Route path="/login" element={<Login />} />
