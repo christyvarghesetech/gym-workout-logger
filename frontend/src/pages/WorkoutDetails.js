@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import api from "../api/axios";
 import LoadingSpinner from "../components/LoadingSpinner";
@@ -11,19 +11,23 @@ function WorkoutDetails() {
     const [rows, setRows] = useState([]);
     const [error, setError] = useState("");
 
-    useEffect(() => {
-    const fetchWorkout = async () => {
+    // Fetch workout/session details
+    const fetchWorkout = useCallback(async () => {
         try {
-            const response = await api.get(`/workouts/${id}/`);
-            setWorkout(response.data);
-        } catch (error) {
-            console.error(error);
-        }
-    };
+            setError("");
 
-    fetchWorkout();
-}, [id]);
-    
+            const response = await api.get(`/workouts/${id}/`);
+
+            setSession(response.data);
+        } catch (error) {
+            console.error("Failed to fetch workout:", error);
+            setError("Failed to load workout.");
+        }
+    }, [id]);
+
+    useEffect(() => {
+        fetchWorkout();
+    }, [fetchWorkout]);
 
     const addRow = () => {
         setRows([
@@ -40,7 +44,9 @@ function WorkoutDetails() {
 
     const updateRow = (index, field, value) => {
         const updated = [...rows];
+
         updated[index][field] = value;
+
         setRows(updated);
     };
 
@@ -104,8 +110,10 @@ function WorkoutDetails() {
             }
 
             setRows([]);
-            fetchWorkout();
-        } catch {
+
+            await fetchWorkout();
+        } catch (error) {
+            console.error("Failed to save workout:", error);
             setError("Failed to save workout.");
         }
     };
@@ -115,13 +123,17 @@ function WorkoutDetails() {
 
         try {
             await api.delete(`/exercises/${exerciseId}/`);
-            fetchWorkout();
-        } catch {
+
+            await fetchWorkout();
+        } catch (error) {
+            console.error("Failed to delete exercise:", error);
             setError("Failed to delete exercise.");
         }
     };
 
-    if (!session) return <LoadingSpinner />;
+    if (!session) {
+        return <LoadingSpinner />;
+    }
 
     return (
         <div>
@@ -129,15 +141,21 @@ function WorkoutDetails() {
 
             <div style={styles.container}>
                 <h1>Workout Session</h1>
+
                 <h3>{session.date}</h3>
 
                 {error && (
-                    <p style={styles.error}>{error}</p>
+                    <p style={styles.error}>
+                        {error}
+                    </p>
                 )}
 
                 {/* Desktop Table */}
 
-                <table className="workout-table" style={styles.table}>
+                <table
+                    className="workout-table"
+                    style={styles.table}
+                >
                     <thead>
                         <tr>
                             <th>Exercise</th>
@@ -155,7 +173,11 @@ function WorkoutDetails() {
                                     <input
                                         value={row.name}
                                         onChange={(e) =>
-                                            updateRow(index, "name", e.target.value)
+                                            updateRow(
+                                                index,
+                                                "name",
+                                                e.target.value
+                                            )
                                         }
                                         style={{
                                             ...styles.input,
@@ -164,6 +186,7 @@ function WorkoutDetails() {
                                                 : "1px solid #ccc",
                                         }}
                                     />
+
                                     {row.errors?.name && (
                                         <small style={styles.helper}>
                                             {row.errors.name}
@@ -177,7 +200,11 @@ function WorkoutDetails() {
                                         min="1"
                                         value={row.sets}
                                         onChange={(e) =>
-                                            updateRow(index, "sets", e.target.value)
+                                            updateRow(
+                                                index,
+                                                "sets",
+                                                e.target.value
+                                            )
                                         }
                                         style={{
                                             ...styles.smallInput,
@@ -186,6 +213,7 @@ function WorkoutDetails() {
                                                 : "1px solid #ccc",
                                         }}
                                     />
+
                                     {row.errors?.sets && (
                                         <small style={styles.helper}>
                                             {row.errors.sets}
@@ -199,7 +227,11 @@ function WorkoutDetails() {
                                         min="1"
                                         value={row.reps}
                                         onChange={(e) =>
-                                            updateRow(index, "reps", e.target.value)
+                                            updateRow(
+                                                index,
+                                                "reps",
+                                                e.target.value
+                                            )
                                         }
                                         style={{
                                             ...styles.smallInput,
@@ -208,6 +240,7 @@ function WorkoutDetails() {
                                                 : "1px solid #ccc",
                                         }}
                                     />
+
                                     {row.errors?.reps && (
                                         <small style={styles.helper}>
                                             {row.errors.reps}
@@ -221,7 +254,11 @@ function WorkoutDetails() {
                                         min="0"
                                         value={row.weight}
                                         onChange={(e) =>
-                                            updateRow(index, "weight", e.target.value)
+                                            updateRow(
+                                                index,
+                                                "weight",
+                                                e.target.value
+                                            )
                                         }
                                         style={{
                                             ...styles.smallInput,
@@ -230,6 +267,7 @@ function WorkoutDetails() {
                                                 : "1px solid #ccc",
                                         }}
                                     />
+
                                     {row.errors?.weight && (
                                         <small style={styles.helper}>
                                             {row.errors.weight}
@@ -240,7 +278,9 @@ function WorkoutDetails() {
                                 <td>
                                     <button
                                         style={styles.removeButton}
-                                        onClick={() => removeRow(index)}
+                                        onClick={() =>
+                                            removeRow(index)
+                                        }
                                     >
                                         ✕
                                     </button>
@@ -254,12 +294,20 @@ function WorkoutDetails() {
 
                 <div className="mobile-card">
                     {rows.map((row, index) => (
-                        <div key={index} className="exercise-card">
+                        <div
+                            key={index}
+                            className="exercise-card"
+                        >
                             <label>Exercise</label>
+
                             <input
                                 value={row.name}
                                 onChange={(e) =>
-                                    updateRow(index, "name", e.target.value)
+                                    updateRow(
+                                        index,
+                                        "name",
+                                        e.target.value
+                                    )
                                 }
                                 style={{
                                     ...styles.input,
@@ -268,6 +316,7 @@ function WorkoutDetails() {
                                         : "1px solid #ccc",
                                 }}
                             />
+
                             {row.errors?.name && (
                                 <small style={styles.helper}>
                                     {row.errors.name}
@@ -275,12 +324,17 @@ function WorkoutDetails() {
                             )}
 
                             <label>Sets</label>
+
                             <input
                                 type="number"
                                 min="1"
                                 value={row.sets}
                                 onChange={(e) =>
-                                    updateRow(index, "sets", e.target.value)
+                                    updateRow(
+                                        index,
+                                        "sets",
+                                        e.target.value
+                                    )
                                 }
                                 style={{
                                     ...styles.input,
@@ -289,6 +343,7 @@ function WorkoutDetails() {
                                         : "1px solid #ccc",
                                 }}
                             />
+
                             {row.errors?.sets && (
                                 <small style={styles.helper}>
                                     {row.errors.sets}
@@ -296,12 +351,17 @@ function WorkoutDetails() {
                             )}
 
                             <label>Reps</label>
+
                             <input
                                 type="number"
                                 min="1"
                                 value={row.reps}
                                 onChange={(e) =>
-                                    updateRow(index, "reps", e.target.value)
+                                    updateRow(
+                                        index,
+                                        "reps",
+                                        e.target.value
+                                    )
                                 }
                                 style={{
                                     ...styles.input,
@@ -310,6 +370,7 @@ function WorkoutDetails() {
                                         : "1px solid #ccc",
                                 }}
                             />
+
                             {row.errors?.reps && (
                                 <small style={styles.helper}>
                                     {row.errors.reps}
@@ -317,12 +378,17 @@ function WorkoutDetails() {
                             )}
 
                             <label>Weight (kg)</label>
+
                             <input
                                 type="number"
                                 min="0"
                                 value={row.weight}
                                 onChange={(e) =>
-                                    updateRow(index, "weight", e.target.value)
+                                    updateRow(
+                                        index,
+                                        "weight",
+                                        e.target.value
+                                    )
                                 }
                                 style={{
                                     ...styles.input,
@@ -331,6 +397,7 @@ function WorkoutDetails() {
                                         : "1px solid #ccc",
                                 }}
                             />
+
                             {row.errors?.weight && (
                                 <small style={styles.helper}>
                                     {row.errors.weight}
@@ -340,7 +407,9 @@ function WorkoutDetails() {
                             <button
                                 className="full-width-btn"
                                 style={styles.removeButton}
-                                onClick={() => removeRow(index)}
+                                onClick={() =>
+                                    removeRow(index)
+                                }
                             >
                                 Remove Exercise
                             </button>
@@ -348,12 +417,20 @@ function WorkoutDetails() {
                     ))}
                 </div>
 
+                {/* Buttons */}
+
                 <div className="button-row">
-                    <button style={styles.addButton} onClick={addRow}>
+                    <button
+                        style={styles.addButton}
+                        onClick={addRow}
+                    >
                         + Add Exercise
                     </button>
 
-                    <button style={styles.saveButton} onClick={saveWorkout}>
+                    <button
+                        style={styles.saveButton}
+                        onClick={saveWorkout}
+                    >
                         Save Workout
                     </button>
                 </div>
@@ -364,27 +441,47 @@ function WorkoutDetails() {
 
                 {session.exercises.length === 0 ? (
                     <div style={styles.emptyState}>
-                        <div style={{ fontSize: "48px", marginBottom: "10px" }}>📋</div>
+                        <div
+                            style={{
+                                fontSize: "48px",
+                                marginBottom: "10px",
+                            }}
+                        >
+                            📋
+                        </div>
 
-                        <h3 style={{ margin: "10px 0" }}>No exercises added</h3>
+                        <h3 style={{ margin: "10px 0" }}>
+                            No exercises added
+                        </h3>
 
-                        <p style={{ color: "#666", textAlign: "center" }}>
+                        <p
+                            style={{
+                                color: "#666",
+                                textAlign: "center",
+                            }}
+                        >
                             Tap "Add Exercise" to begin.
                         </p>
                     </div>
                 ) : (
                     session.exercises.map((exercise) => (
-                        <div key={exercise.id} style={styles.card}>
+                        <div
+                            key={exercise.id}
+                            style={styles.card}
+                        >
                             <strong>{exercise.name}</strong>
 
                             <p>
-                                {exercise.sets} sets • {exercise.reps} reps •{" "}
+                                {exercise.sets} sets •{" "}
+                                {exercise.reps} reps •{" "}
                                 {exercise.weight} kg
                             </p>
 
                             <button
                                 style={styles.deleteButton}
-                                onClick={() => deleteExercise(exercise.id)}
+                                onClick={() =>
+                                    deleteExercise(exercise.id)
+                                }
                             >
                                 Delete
                             </button>
