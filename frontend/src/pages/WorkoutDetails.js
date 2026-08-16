@@ -16,7 +16,7 @@ function WorkoutDetails() {
         try {
             setError("");
 
-            const response = await api.get(`/workouts/${id}/`);
+            const response = await api.get(`/sessions/${id}/`);
 
             setSession(response.data);
         } catch (error) {
@@ -139,13 +139,13 @@ function WorkoutDetails() {
         <div>
             <Navbar />
 
-            <div style={styles.container}>
-                <h1>Workout Session</h1>
+            <div className="dashboard">
+                <h1 style={{ color: "#FFD700", textAlign: "center", fontSize: "40px", marginBottom: "10px" }}>Workout Session</h1>
 
-                <h3>{session.date}</h3>
+                <h3 style={{ color: "#9ca3af", textAlign: "center", fontWeight: "500", marginBottom: "30px" }}>{session.date}</h3>
 
                 {error && (
-                    <p style={styles.error}>
+                    <p style={{ color: "#ef4444", marginBottom: "15px", fontWeight: "500", textAlign: "center" }}>
                         {error}
                     </p>
                 )}
@@ -154,14 +154,13 @@ function WorkoutDetails() {
 
                 <table
                     className="workout-table"
-                    style={styles.table}
                 >
                     <thead>
                         <tr>
                             <th>Exercise</th>
                             <th>Sets</th>
                             <th>Reps</th>
-                            <th>Weight</th>
+                            <th>Weight (kg)</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -179,16 +178,19 @@ function WorkoutDetails() {
                                                 e.target.value
                                             )
                                         }
+                                        placeholder="Exercise name"
                                         style={{
                                             ...styles.input,
                                             border: row.errors?.name
-                                                ? "1px solid red"
-                                                : "1px solid #ccc",
+                                                ? "1px solid #ef4444"
+                                                : "1px solid #3A3A3A",
+                                            background: "#111",
+                                            color: "#fff",
                                         }}
                                     />
 
                                     {row.errors?.name && (
-                                        <small style={styles.helper}>
+                                        <small style={{ display: "block", color: "#ef4444", marginTop: "4px", fontSize: "12px" }}>
                                             {row.errors.name}
                                         </small>
                                     )}
@@ -206,16 +208,19 @@ function WorkoutDetails() {
                                                 e.target.value
                                             )
                                         }
+                                        placeholder="0"
                                         style={{
                                             ...styles.smallInput,
                                             border: row.errors?.sets
-                                                ? "1px solid red"
-                                                : "1px solid #ccc",
+                                                ? "1px solid #ef4444"
+                                                : "1px solid #3A3A3A",
+                                            background: "#111",
+                                            color: "#fff",
                                         }}
                                     />
 
                                     {row.errors?.sets && (
-                                        <small style={styles.helper}>
+                                        <small style={{ display: "block", color: "#ef4444", marginTop: "4px", fontSize: "12px" }}>
                                             {row.errors.sets}
                                         </small>
                                     )}
@@ -233,16 +238,19 @@ function WorkoutDetails() {
                                                 e.target.value
                                             )
                                         }
+                                        placeholder="0"
                                         style={{
                                             ...styles.smallInput,
                                             border: row.errors?.reps
-                                                ? "1px solid red"
-                                                : "1px solid #ccc",
+                                                ? "1px solid #ef4444"
+                                                : "1px solid #3A3A3A",
+                                            background: "#111",
+                                            color: "#fff",
                                         }}
                                     />
 
                                     {row.errors?.reps && (
-                                        <small style={styles.helper}>
+                                        <small style={{ display: "block", color: "#ef4444", marginTop: "4px", fontSize: "12px" }}>
                                             {row.errors.reps}
                                         </small>
                                     )}
@@ -260,16 +268,19 @@ function WorkoutDetails() {
                                                 e.target.value
                                             )
                                         }
+                                        placeholder="0"
                                         style={{
                                             ...styles.smallInput,
                                             border: row.errors?.weight
-                                                ? "1px solid red"
-                                                : "1px solid #ccc",
+                                                ? "1px solid #ef4444"
+                                                : "1px solid #3A3A3A",
+                                            background: "#111",
+                                            color: "#fff",
                                         }}
                                     />
 
                                     {row.errors?.weight && (
-                                        <small style={styles.helper}>
+                                        <small style={{ display: "block", color: "#ef4444", marginTop: "4px", fontSize: "12px" }}>
                                             {row.errors.weight}
                                         </small>
                                     )}
@@ -277,7 +288,7 @@ function WorkoutDetails() {
 
                                 <td>
                                     <button
-                                        style={styles.removeButton}
+                                        style={{ background: "transparent", color: "#ef4444", border: "none", fontSize: "16px", cursor: "pointer", padding: "8px 12px" }}
                                         onClick={() =>
                                             removeRow(index)
                                         }
@@ -298,7 +309,7 @@ function WorkoutDetails() {
                             key={index}
                             className="exercise-card"
                         >
-                            <label>Exercise</label>
+                            <label style={{ display: "block", marginBottom: "6px", color: "#FFD700", fontWeight: "600" }}>Exercise</label>
 
                             <input
                                 value={row.name}
@@ -309,21 +320,24 @@ function WorkoutDetails() {
                                         e.target.value
                                     )
                                 }
+                                placeholder="Exercise name"
                                 style={{
                                     ...styles.input,
                                     border: row.errors?.name
-                                        ? "1px solid red"
-                                        : "1px solid #ccc",
+                                        ? "1px solid #ef4444"
+                                        : "1px solid #3A3A3A",
+                                    background: "#111",
+                                    color: "#fff",
                                 }}
                             />
 
                             {row.errors?.name && (
-                                <small style={styles.helper}>
+                                <small style={{ display: "block", color: "#ef4444", marginTop: "4px", fontSize: "12px" }}>
                                     {row.errors.name}
                                 </small>
                             )}
 
-                            <label>Sets</label>
+                            <label style={{ display: "block", margin: "12px 0 6px", color: "#FFD700", fontWeight: "600" }}>Sets</label>
 
                             <input
                                 type="number"
@@ -336,21 +350,24 @@ function WorkoutDetails() {
                                         e.target.value
                                     )
                                 }
+                                placeholder="0"
                                 style={{
                                     ...styles.input,
                                     border: row.errors?.sets
-                                        ? "1px solid red"
-                                        : "1px solid #ccc",
+                                        ? "1px solid #ef4444"
+                                        : "1px solid #3A3A3A",
+                                    background: "#111",
+                                    color: "#fff",
                                 }}
                             />
 
                             {row.errors?.sets && (
-                                <small style={styles.helper}>
+                                <small style={{ display: "block", color: "#ef4444", marginTop: "4px", fontSize: "12px" }}>
                                     {row.errors.sets}
                                 </small>
                             )}
 
-                            <label>Reps</label>
+                            <label style={{ display: "block", margin: "12px 0 6px", color: "#FFD700", fontWeight: "600" }}>Reps</label>
 
                             <input
                                 type="number"
@@ -363,21 +380,24 @@ function WorkoutDetails() {
                                         e.target.value
                                     )
                                 }
+                                placeholder="0"
                                 style={{
                                     ...styles.input,
                                     border: row.errors?.reps
-                                        ? "1px solid red"
-                                        : "1px solid #ccc",
+                                        ? "1px solid #ef4444"
+                                        : "1px solid #3A3A3A",
+                                    background: "#111",
+                                    color: "#fff",
                                 }}
                             />
 
                             {row.errors?.reps && (
-                                <small style={styles.helper}>
+                                <small style={{ display: "block", color: "#ef4444", marginTop: "4px", fontSize: "12px" }}>
                                     {row.errors.reps}
                                 </small>
                             )}
 
-                            <label>Weight (kg)</label>
+                            <label style={{ display: "block", margin: "12px 0 6px", color: "#FFD700", fontWeight: "600" }}>Weight (kg)</label>
 
                             <input
                                 type="number"
@@ -390,23 +410,26 @@ function WorkoutDetails() {
                                         e.target.value
                                     )
                                 }
+                                placeholder="0"
                                 style={{
                                     ...styles.input,
                                     border: row.errors?.weight
-                                        ? "1px solid red"
-                                        : "1px solid #ccc",
+                                        ? "1px solid #ef4444"
+                                        : "1px solid #3A3A3A",
+                                    background: "#111",
+                                    color: "#fff",
                                 }}
                             />
 
                             {row.errors?.weight && (
-                                <small style={styles.helper}>
+                                <small style={{ display: "block", color: "#ef4444", marginTop: "4px", fontSize: "12px" }}>
                                     {row.errors.weight}
                                 </small>
                             )}
 
                             <button
                                 className="full-width-btn"
-                                style={styles.removeButton}
+                                style={{ background: "#B91C1C", color: "white", padding: "10px", marginTop: "15px", cursor: "pointer" }}
                                 onClick={() =>
                                     removeRow(index)
                                 }
@@ -421,42 +444,60 @@ function WorkoutDetails() {
 
                 <div className="button-row">
                     <button
-                        style={styles.addButton}
+                        style={{
+                            background: "transparent",
+                            border: "1px solid #D4AF37",
+                            color: "#D4AF37",
+                            fontWeight: "600",
+                            padding: "14px",
+                            cursor: "pointer",
+                            borderRadius: "12px",
+                            flex: 1,
+                        }}
                         onClick={addRow}
                     >
                         + Add Exercise
                     </button>
 
                     <button
-                        style={styles.saveButton}
+                        style={{
+                            background: "linear-gradient(135deg, #FFD700, #C99A00)",
+                            color: "black",
+                            fontWeight: "800",
+                            border: "none",
+                            padding: "14px",
+                            cursor: "pointer",
+                            borderRadius: "12px",
+                            flex: 1,
+                        }}
                         onClick={saveWorkout}
                     >
                         Save Workout
                     </button>
                 </div>
 
-                <hr style={{ margin: "30px 0" }} />
+                <hr style={{ margin: "40px 0", borderColor: "rgba(212, 175, 55, 0.15)" }} />
 
-                <h2>Saved Exercises</h2>
+                <h2 style={{ color: "#FFD700", marginBottom: "20px" }}>Saved Exercises</h2>
 
                 {session.exercises.length === 0 ? (
-                    <div style={styles.emptyState}>
+                    <div className="empty-state">
                         <div
                             style={{
                                 fontSize: "48px",
-                                marginBottom: "10px",
+                                marginBottom: "15px",
                             }}
                         >
                             📋
                         </div>
 
-                        <h3 style={{ margin: "10px 0" }}>
+                        <h3 style={{ margin: "10px 0", color: "#fff" }}>
                             No exercises added
                         </h3>
 
                         <p
                             style={{
-                                color: "#666",
+                                color: "#9ca3af",
                                 textAlign: "center",
                             }}
                         >
@@ -464,29 +505,37 @@ function WorkoutDetails() {
                         </p>
                     </div>
                 ) : (
-                    session.exercises.map((exercise) => (
-                        <div
-                            key={exercise.id}
-                            style={styles.card}
-                        >
-                            <strong>{exercise.name}</strong>
-
-                            <p>
-                                {exercise.sets} sets •{" "}
-                                {exercise.reps} reps •{" "}
-                                {exercise.weight} kg
-                            </p>
-
-                            <button
-                                style={styles.deleteButton}
-                                onClick={() =>
-                                    deleteExercise(exercise.id)
-                                }
+                    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: "15px" }}>
+                        {session.exercises.map((exercise) => (
+                            <div
+                                key={exercise.id}
+                                className="workout-card"
+                                style={{ margin: 0, cursor: "default" }}
                             >
-                                Delete
-                            </button>
-                        </div>
-                    ))
+                                <strong style={{ fontSize: "18px", color: "#FFD700" }}>{exercise.name}</strong>
+
+                                <p style={{ color: "#e2e8f0", margin: "8px 0 12px" }}>
+                                    {exercise.sets} sets • {exercise.reps} reps • {exercise.weight} kg
+                                </p>
+
+                                <button
+                                    style={{
+                                        padding: "8px 14px",
+                                        background: "#B91C1C",
+                                        color: "white",
+                                        border: "none",
+                                        borderRadius: "6px",
+                                        cursor: "pointer",
+                                    }}
+                                    onClick={() =>
+                                        deleteExercise(exercise.id)
+                                    }
+                                >
+                                    Delete
+                                </button>
+                            </div>
+                        ))}
+                    </div>
                 )}
             </div>
         </div>
@@ -494,90 +543,23 @@ function WorkoutDetails() {
 }
 
 const styles = {
-    container: {
-        padding: "30px",
-        maxWidth: "900px",
-        margin: "0 auto",
-    },
-
-    table: {
-        width: "100%",
-        borderCollapse: "collapse",
-        marginBottom: "20px",
-    },
-
     input: {
         width: "100%",
-        padding: "8px",
-        borderRadius: "6px",
+        padding: "10px 14px",
+        borderRadius: "8px",
         boxSizing: "border-box",
+        outline: "none",
+        transition: "border-color .2s",
     },
 
     smallInput: {
-        width: "70px",
-        padding: "8px",
-        borderRadius: "6px",
-    },
-
-    helper: {
-        display: "block",
-        color: "red",
-        marginTop: "4px",
-        fontSize: "12px",
-    },
-
-    error: {
-        color: "red",
-        marginBottom: "15px",
-        fontWeight: "500",
-    },
-
-    addButton: {
-        padding: "10px 16px",
-        borderRadius: "6px",
-        cursor: "pointer",
-    },
-
-    saveButton: {
-        padding: "10px 20px",
-        background: "#111827",
-        color: "white",
-        border: "none",
-        borderRadius: "6px",
-        cursor: "pointer",
-    },
-
-    removeButton: {
-        padding: "8px 12px",
-        cursor: "pointer",
-    },
-
-    deleteButton: {
-        marginTop: "10px",
-        padding: "8px 14px",
-        background: "#dc2626",
-        color: "white",
-        border: "none",
-        borderRadius: "6px",
-        cursor: "pointer",
-    },
-
-    card: {
-        border: "1px solid #ddd",
-        borderRadius: "10px",
-        padding: "15px",
-        marginBottom: "12px",
-    },
-
-    emptyState: {
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
+        width: "80px",
+        padding: "10px",
+        borderRadius: "8px",
         textAlign: "center",
-        padding: "50px 20px",
-        border: "2px dashed #999",
-        borderRadius: "12px",
+        boxSizing: "border-box",
+        outline: "none",
+        transition: "border-color .2s",
     },
 };
 
